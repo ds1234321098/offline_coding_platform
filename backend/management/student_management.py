@@ -4,6 +4,7 @@ class student(BaseModel):
     roll_number: str
     semester: int
     branch: str
+    password: str
 students = []
 def add(candidate: student):
     for a in students:
