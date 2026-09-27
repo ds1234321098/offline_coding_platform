@@ -4,5 +4,6 @@ create table questions(
         on DELETE cascade,
     question_number int not null,
     question text not null,
-    primary key(session_id, question)
+    primary key(session_id, question_number),
+    unique(session_id,question)
 );
