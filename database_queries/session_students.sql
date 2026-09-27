@@ -9,6 +9,7 @@ CREATE TABLE session_students (
     result VARCHAR(20) NOT NULL
         DEFAULT 'Not attempted'
         CHECK (result IN ('Passed', 'TLE', 'Failed', 'Not attempted', 'MLE')),
+    code_language varchar(10) not null,
     PRIMARY KEY (session_id, roll_number, question_number)
     FOREIGN KEY (session_id, question_number)
         REFERENCES questions(session_id, question_number)
