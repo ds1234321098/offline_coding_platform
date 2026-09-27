@@ -10,4 +10,6 @@ CREATE TABLE session_students (
         DEFAULT 'Not attempted'
         CHECK (result IN ('Passed', 'TLE', 'Failed', 'Not attempted', 'MLE')),
     PRIMARY KEY (session_id, roll_number, question_number)
+    FOREIGN KEY (session_id, question_number)
+        REFERENCES questions(session_id, question_number)
 );
