@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 import sys
-import bcrypt
+from password_hash import hash_password
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__),"..","..", "database_queries")))
 from sqlalchemy.orm import sessionmaker
@@ -15,11 +15,6 @@ class student_class(BaseModel):
     semester: int
     branch: str
     password: str
-def hash_password(plain: str) -> str:
-    pw_bytes = plain.encode("utf-8")
-    salt = bcrypt.gensalt(rounds=12)
-    hashed = bcrypt.hashpw(pw_bytes, salt)
-    return hashed.decode("utf-8")
 def add(candidate: student_class):
     students=Session.query(st.Students).all()
     for a in students:
