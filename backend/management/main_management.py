@@ -67,6 +67,7 @@ def student_management_menu():
                         print(candidate.semester)
                         print(candidate.branch)
                         print(candidate.password_hash)
+                        print("\n")
             elif choice == "6":
                 break
             else:
