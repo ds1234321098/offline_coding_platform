@@ -1,23 +1,40 @@
 from pydantic import BaseModel
-class student(BaseModel):
+import sys
+import bcrypt
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__),"..","..", "database_queries")))
+from sqlalchemy.orm import sessionmaker
+import Engine
+import students as st
+session=sessionmaker(bind=Engine.engine)
+Session=session()
+students=[]
+class student_class(BaseModel):
     name: str
     roll_number: str
     semester: int
     branch: str
     password: str
-students = []
-def add(candidate: student):
+def hash_password(plain: str) -> str:
+    pw_bytes = plain.encode("utf-8")
+    salt = bcrypt.gensalt(rounds=12)
+    hashed = bcrypt.hashpw(pw_bytes, salt)
+    return hashed.decode("utf-8")
+def add(candidate: student_class):
+    students=Session.query(st.Students).all()
     for a in students:
         if a.roll_number == candidate.roll_number:
             return False
-    students.append(candidate)
+    new_Student=st.Students(roll_number=candidate.roll_number,name=candidate.name,semester=candidate.semester,branch=candidate.branch,password_hash=hash_password(candidate.password))
+    Session.add(new_Student)
+    Session.commit()
     return True
 def read(roll_number: str):
     for a in students:
         if a.roll_number == roll_number:
             return a
     return None
-def update(roll_number: str, candidate: student):
+def update(roll_number: str, candidate: student_class):
     for i in range(len(students)):
         if students[i].roll_number == roll_number:
             students[i] = candidate
@@ -31,3 +48,4 @@ def delete(roll_number: str):
     return False
 def get_all():
     return students
+Session.close()

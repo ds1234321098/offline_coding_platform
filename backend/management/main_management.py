@@ -17,7 +17,7 @@ def student_management_menu():
                 semester = int(input("Enter semester: "))
                 branch = input("Enter branch: ")
                 password = input("Enter password: ")
-                candidate = student_management.student(name=name,roll_number=roll_number,semester=semester,branch=branch,password=password)
+                candidate = student_management.student_class(name=name,roll_number=roll_number,semester=semester,branch=branch,password=password)
                 if student_management.add(candidate):
                     print("Student added successfully.")
                 else:
@@ -41,7 +41,7 @@ def student_management_menu():
                 semester = int(input("Enter new semester: "))
                 branch = input("Enter new branch: ")
                 password = input("Enter password: ")
-                candidate = student_management.student(name=name,roll_number=new_roll_number,semester=semester,branch=branch,password=password)
+                candidate = student_management.student_class(name=name,roll_number=new_roll_number,semester=semester,branch=branch,password=password)
                 if student_management.update(roll_number, candidate):
                     print("Student updated successfully.")
                 else:
