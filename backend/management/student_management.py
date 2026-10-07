@@ -25,22 +25,35 @@ def add(candidate: student_class):
     Session.commit()
     return True
 def read(roll_number: str):
+    students=Session.query(st.Students).all()
     for a in students:
         if a.roll_number == roll_number:
             return a
     return None
 def update(roll_number: str, candidate: student_class):
-    for i in range(len(students)):
-        if students[i].roll_number == roll_number:
-            students[i] = candidate
-            return True
-    return False
+    try:
+        students=Session.query(st.Students).all()
+        with Session.begin_nested():
+            for person in students:
+                if person.roll_number == roll_number:
+                    (Session.query(st.Students).filter_by(roll_number=roll_number).all())[0].name=candidate.name
+                    (Session.query(st.Students).filter_by(roll_number=roll_number).all())[0].branch=candidate.branch
+                    (Session.query(st.Students).filter_by(roll_number=roll_number).all())[0].semester=candidate.semester
+                    (Session.query(st.Students).filter_by(roll_number=roll_number).all())[0].password_hash=hash_password(candidate.password)
+                    Session.commit()
+                    return True
+            return False
+    except Exception as a:
+        print(f"Error : {a}")
 def delete(roll_number: str):
-    for i in range(len(students)):
-        if students[i].roll_number == roll_number:
-            students.pop(i)
+    students=Session.query(st.Students).all()
+    for person in students:
+        if person.roll_number==roll_number:
+            Session.delete(person)
+            Session.commit()
             return True
     return False
 def get_all():
+    students=Session.query(st.Students).all()
     return students
 Session.close()

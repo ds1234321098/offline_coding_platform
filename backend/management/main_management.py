@@ -27,7 +27,11 @@ def student_management_menu():
                 candidate = student_management.read(roll_number)
                 if candidate:
                     print("\nStudent found:")
-                    print(candidate)
+                    print(candidate.name)
+                    print(candidate.roll_number)
+                    print(candidate.semester)
+                    print(candidate.branch)
+                    print(candidate.password_hash)
                 else:
                     print("Student not found.")
             elif choice == "3":
@@ -37,11 +41,10 @@ def student_management_menu():
                     print("Student not found.")
                     continue
                 name = input("Enter new student name: ")
-                new_roll_number = input("Enter new roll number: ")
                 semester = int(input("Enter new semester: "))
                 branch = input("Enter new branch: ")
                 password = input("Enter password: ")
-                candidate = student_management.student_class(name=name,roll_number=new_roll_number,semester=semester,branch=branch,password=password)
+                candidate = student_management.student_class(name=name,roll_number=roll_number,semester=semester,branch=branch,password=password)
                 if student_management.update(roll_number, candidate):
                     print("Student updated successfully.")
                 else:
@@ -59,7 +62,11 @@ def student_management_menu():
                 else:
                     print("\n===== ALL STUDENTS =====")
                     for candidate in students:
-                        print(candidate)
+                        print(candidate.name)
+                        print(candidate.roll_number)
+                        print(candidate.semester)
+                        print(candidate.branch)
+                        print(candidate.password_hash)
             elif choice == "6":
                 break
             else:
