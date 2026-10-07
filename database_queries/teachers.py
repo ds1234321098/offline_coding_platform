@@ -1,10 +1,7 @@
 import sqlalchemy as db
-engine=db.create_engine("postresql+psycopg2://dhruvsharma@:localhost:5432/offline_coding_platform")
-metadata=db.MetaData()
-teachers=db.Table(
-    "teachers",metadata,
-    db.Column("username",primary_key=True),
-    db.Column("name",db.VARCHAR(50),nullable=False),
-    db.Column("password_hash",db.VARCHAR(255),nullable=False)
-)
-metadata.create_all(engine)
+from Engine import Base
+class Teachers(Base):
+    __tablename__="teachers"
+    username=db.Column("username",db.VARCHAR(50),primary_key=True)
+    name=db.Column("name",db.VARCHAR(50),nullable=False)
+    password_hash=db.Column("password_hash",db.VARCHAR(255),nullable=False)
