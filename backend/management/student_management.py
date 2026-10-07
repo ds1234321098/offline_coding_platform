@@ -8,7 +8,6 @@ import Engine
 import students as st
 session=sessionmaker(bind=Engine.engine)
 Session=session()
-students=[]
 class student_class(BaseModel):
     name: str
     roll_number: str
