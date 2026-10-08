@@ -62,11 +62,11 @@ def student_management_menu():
                 else:
                     print("\n===== ALL STUDENTS =====")
                     for candidate in students:
-                        print(candidate.name)
-                        print(candidate.roll_number)
-                        print(candidate.semester)
-                        print(candidate.branch)
-                        print(candidate.password_hash)
+                        print(f"name: {candidate.name}")
+                        print(f"roll_number: {candidate.roll_number}")
+                        print(f"semester: {candidate.semester}")
+                        print(f"branch: {candidate.branch}")
+                        print(f"password_hash: {candidate.password_hash}")
                         print("\n")
             elif choice == "6":
                 break
@@ -86,10 +86,10 @@ def teacher_management_menu():
         try:
             choice = input("Enter your choice: ")
             if choice == "1":
-                name = input("Enter teacher name: ")
                 username = input("Enter username: ")
+                name = input("Enter teacher name: ")
                 password = input("Enter password: ")
-                candidate = teacher_management.teacher(name=name,username=username,password=password)
+                candidate = teacher_management.teacher_class(name=name,username=username,password=password)
                 if teacher_management.add(candidate):
                     print("Teacher added successfully.")
                 else:
@@ -99,7 +99,9 @@ def teacher_management_menu():
                 candidate = teacher_management.read(username)
                 if candidate:
                     print("\nTeacher found:")
-                    print(candidate)
+                    print(candidate.name)
+                    print(candidate.username)
+                    print(candidate.password_hash)
                 else:
                     print("Teacher not found.")
             elif choice == "3":
@@ -109,9 +111,8 @@ def teacher_management_menu():
                     print("Teacher not found.")
                     continue
                 name = input("Enter new teacher name: ")
-                new_username = input("Enter new username: ")
                 password = input("Enter new password: ")
-                candidate = teacher_management.teacher(name=name,username=new_username,password=password)
+                candidate = teacher_management.teacher_class(name=name,username=username,password=password)
                 if teacher_management.update(username, candidate):
                     print("Teacher updated successfully.")
                 else:
@@ -129,7 +130,10 @@ def teacher_management_menu():
                 else:
                     print("\n===== ALL TEACHERS =====")
                     for candidate in teachers:
-                        print(candidate)
+                        print(f"username: {candidate.username}")
+                        print(f"name: {candidate.name}")
+                        print(f"password_hash: {candidate.password_hash}")
+                        print("")
             elif choice == "6":
                 break
             else:
