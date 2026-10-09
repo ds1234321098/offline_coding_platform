@@ -1,9 +1,9 @@
-import uuid
 import sqlalchemy as db
 from Engine import Base
+from create_session_id import create_session_id
 class Sessions(Base):
     __tablename__ = "sessions"
-    id = db.Column(db.VARCHAR(10), primary_key=True, default=uuid.uuid4)
+    id = db.Column(db.VARCHAR(10),primary_key=True, default=create_session_id)
     branch = db.Column(db.VARCHAR(length=10),nullable=False)
     semester = db.Column(db.Integer,nullable=False)
     session_date = db.Column(db.Date,nullable=False)

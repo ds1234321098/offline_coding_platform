@@ -18,10 +18,17 @@ class lab_session_class(BaseModel):
     status: str = "active"
 @session.post("/create")
 def create_session(lab_session: lab_session_class):
-    new_session=ss.Sessions(id=uuid.uuid4(),branch=lab_session.branch,semester=lab_session.semester,session_date=lab_session.session_date,session_time=lab_session.session_time,status=lab_session.status)
+    new_session = ss.Sessions(
+        branch=lab_session.branch,
+        semester=lab_session.semester,
+        session_date=lab_session.session_date,
+        session_time=lab_session.session_time,
+        status=lab_session.status
+    )
     Session.add(new_session)
     Session.commit()
-    return{
+    Session.refresh(new_session)
+    return {
         "message": "Session created successfully",
         "session.id": new_session.id,
         "session.branch": new_session.branch,
@@ -47,7 +54,7 @@ def get_all_sessions():
         ]
     }
 @session.get("/{session_id}")
-def get_session(session_id: uuid.UUID):
+def get_session(session_id: str):
     sessions=Session.query(ss.Sessions).all()
     for session in sessions:
         if session.id == session_id:
@@ -61,7 +68,7 @@ def get_session(session_id: uuid.UUID):
             }
     raise HTTPException(status_code=404,detail="Session not found")
 @session.put("/end")
-def end_session(session_id: uuid.UUID):
+def end_session(session_id: str):
     sessions=Session.query(ss.Sessions).all()
     for lab_session in sessions:
         if lab_session.id == session_id:
