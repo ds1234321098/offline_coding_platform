@@ -8,5 +8,5 @@ class Sessions(Base):
     semester = db.Column(db.Integer,nullable=False)
     session_date = db.Column(db.Date,nullable=False)
     session_time = db.Column(db.Time,nullable=False)
-    status = db.Column(db.VARCHAR(length=7),nullable=False)
+    status = db.Column(db.VARCHAR(length=7),nullable=False,default='active')
     __table_args__ = (db.CheckConstraint("semester BETWEEN 1 AND 8"),db.CheckConstraint("status IN ('active', 'ended')"))

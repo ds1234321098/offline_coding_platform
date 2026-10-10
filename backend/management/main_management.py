@@ -99,8 +99,8 @@ def teacher_management_menu():
                 candidate = teacher_management.read(username)
                 if candidate:
                     print("\nTeacher found:")
-                    print(candidate.name)
                     print(candidate.username)
+                    print(candidate.name)
                     print(candidate.password_hash)
                 else:
                     print("Teacher not found.")
