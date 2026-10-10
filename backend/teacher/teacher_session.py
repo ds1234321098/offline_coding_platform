@@ -1,7 +1,6 @@
 from fastapi import APIRouter, HTTPException, FastAPI
 from pydantic import BaseModel, Field
 from datetime import date, time, datetime
-import uuid
 import os,sys
 from sqlalchemy.orm import sessionmaker
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__),"..","..", "database_queries")))
