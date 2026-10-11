@@ -1,2 +1,0 @@
-TRUNCATE TABLE sessions CASCADE
-ALTER SEQUENCE session_id_sequence RESTART WITH 1;
