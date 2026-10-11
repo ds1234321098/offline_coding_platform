@@ -14,7 +14,7 @@ def func_auth(candidate: student):
     Session=session_maker()
     try:
         data=Session.query(st.Students).filter_by(roll_number=candidate.roll_number).all()
-        if len(data) is not 0:
+        if len(data) != 0:
             if candidate.roll_number == data[0].roll_number and verify_entered_password(candidate.password,data[0].password_hash):
                 return {
                     "message": "Authentication successful"

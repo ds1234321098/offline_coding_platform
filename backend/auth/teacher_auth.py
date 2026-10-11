@@ -14,7 +14,7 @@ def func_auth(teacher: Teacher):
     Session=session_maker()
     try:
         data=Session.query(tc.Teachers).filter_by(username=teacher.username).all()
-        if len(data) is not 0:
+        if len(data) != 0:
             if teacher.username == data[0].username and verify_entered_password(teacher.password,data[0].password_hash):
                 return{
                     "message": "Authentication successful"
