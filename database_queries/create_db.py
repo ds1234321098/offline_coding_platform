@@ -9,7 +9,7 @@ from student_enteries_in_session import Student_Enteries
 from session_questions import Session_Questions
 from question_topics import Question_Topics
 from session_topics import Session_Topics
-if __name__ == "__main__":
+def initialize():
     Base.metadata.create_all(engine)
     with engine.begin() as connection:
         connection.execute(db.text("""
@@ -20,6 +20,8 @@ if __name__ == "__main__":
                 MAXVALUE 2000000000
                 NO CYCLE;
         """))
+if __name__ == "__main__":
+    initialize()
 def reset_counter():
     Base.metadata.create_all(engine)
     with engine.begin() as conn:
