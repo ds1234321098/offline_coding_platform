@@ -20,3 +20,7 @@ if __name__ == "__main__":
                 MAXVALUE 2000000000
                 NO CYCLE;
         """))
+def reset_counter():
+    Base.metadata.create_all(engine)
+    with engine.begin() as conn:
+        conn.execute(db.text("TRUNCATE TABLE sessions CASCADE ALTER SEQUENCE session_id_sequence RESTART WITH 1;"))
