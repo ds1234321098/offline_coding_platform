@@ -28,4 +28,4 @@ def reset_counter():
         conn.execute(db.text("TRUNCATE TABLE sessions CASCADE ALTER SEQUENCE session_id_sequence RESTART WITH 1;"))
 def reset_questions_sequence():
     with engine.begin() as conn:
-        conn.execute(db.text("ALTER TABLE questions ALTER COLUMN question_id RESTART WITH 1;"))
+        conn.execute(db.text("ALTER TABLE questions ALTER COLUMN question_id RESTART WITH 1TRUNCATE TABLE questions RESTART IDENTITY CASCADE;"))
