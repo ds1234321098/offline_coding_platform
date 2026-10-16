@@ -3,6 +3,8 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "d
 import create_db
 from fastapi import FastAPI
 from teacher.teacher_session import session
+from auth.teacher_auth import auth as auth1
+from auth.student_auth import auth as auth2
 from student.student_session import student_session
 from management.question_management import questions
 from management.topic_management import topic_management
@@ -37,6 +39,16 @@ app.include_router(
     prefix="/teacher/session/questions",
     tags=["Session Question Assignment"]
 )
+app.include_router(
+    auth1,
+    prefix="/teacher_auth",
+    tags=["Teacher Authenticator"]
+)
+app.include_router(
+    auth2,
+    prefix="/student_auth",
+    tags=["Student Authenticator"]
+)
 @app.get("/")
 def home():
     return {
@@ -47,8 +59,3 @@ def health():
     return {
         "status": "running"
     }
-@app.post("/clear_db")
-def clean_db():
-    create_db.reset_counter()
-    create_db.reset_questions_sequence()
-    return {"result":"cleared the table"}

@@ -5,11 +5,11 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__),"..",".."
 from verify_password import verify_entered_password
 from engine import session_maker
 import teachers as tc
-teacher_auth = APIRouter()
+auth = APIRouter()
 class Teacher(BaseModel):
     username: str
     password: str
-@teacher_auth.post("/teacher_auth")
+@auth.post("/auth")
 def func_auth(teacher: Teacher):
     Session=session_maker()
     try:
