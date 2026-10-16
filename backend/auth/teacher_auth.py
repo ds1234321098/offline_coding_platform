@@ -2,8 +2,8 @@ from fastapi import APIRouter, HTTPException, FastAPI
 from pydantic import BaseModel
 import sys,os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__),"..","..", "database_queries")))
-from verify_password import verify_entered_password
-from engine import session_maker
+from auth.verify_password import verify_entered_password
+from Engine import session_maker
 import teachers as tc
 auth = APIRouter()
 class Teacher(BaseModel):
