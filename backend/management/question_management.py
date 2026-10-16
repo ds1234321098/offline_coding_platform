@@ -4,7 +4,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__),"..",".."
 import questions as qs
 from Engine import session_maker
 from pydantic import BaseModel,Field
-questions=FastAPI()
+questions=APIRouter()
 class Question_enteries(BaseModel):
     title:str
     description:str

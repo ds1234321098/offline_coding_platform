@@ -6,7 +6,7 @@ import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "database_queries")))
 from Engine import session_maker
 import sessions as ss
-session = FastAPI()
+session = APIRouter()
 class lab_session_class(BaseModel):
     branch: str
     semester: int

@@ -7,7 +7,7 @@ from students import Students
 from sessions import Sessions
 from fastapi import APIRouter, HTTPException, FastAPI
 from pydantic import BaseModel
-student_session = FastAPI()
+student_session = APIRouter()
 class Student_Response(BaseModel):
     id: str
     roll_number: str

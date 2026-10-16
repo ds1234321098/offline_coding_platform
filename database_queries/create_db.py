@@ -23,9 +23,9 @@ def initialize():
 if __name__ == "__main__":
     initialize()
 def reset_counter():
-    Base.metadata.create_all(engine)
     with engine.begin() as conn:
-        conn.execute(db.text("TRUNCATE TABLE sessions CASCADE ALTER SEQUENCE session_id_sequence RESTART WITH 1;"))
+        conn.execute(db.text("TRUNCATE TABLE sessions CASCADE;"))
+        conn.execute(db.text("ALTER SEQUENCE session_id_sequence RESTART WITH 1;"))
 def reset_questions_sequence():
     with engine.begin() as conn:
-        conn.execute(db.text("ALTER TABLE questions ALTER COLUMN question_id RESTART WITH 1TRUNCATE TABLE questions RESTART IDENTITY CASCADE;"))
+        conn.execute(db.text("TRUNCATE TABLE questions RESTART IDENTITY CASCADE;"))

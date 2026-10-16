@@ -5,7 +5,7 @@ from verify_password import verify_entered_password
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__),"..","..", "database_queries")))
 from Engine import session_maker
 import students as st
-student_auth = FastAPI()
+student_auth = APIRouter()
 class student(BaseModel):
     roll_number: str
     password: str

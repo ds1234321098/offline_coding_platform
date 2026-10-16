@@ -6,7 +6,7 @@ from Engine import session_maker
 import questions as qs
 import topic_tag as tt
 import question_topics as qt
-topic_management=FastAPI()
+topic_management=APIRouter()
 class Topic_Enteries(BaseModel):
     topic_name:str=Field(min_length=1,max_length=50)
 class Question_Topic_Enteries(BaseModel):
@@ -167,22 +167,21 @@ def remove_topic(entry:Single_Question_Topic_Enteries):
     finally:
         Session.close()
 @topic_management.delete("/delete_topic/{topic_name}")
-def delete_topic(topic_name: str):
-    Session = session_maker()
+def delete_topic(topic_name:str):
+    Session=session_maker()
     try:
-        data = Session.query(tt.Topic_tag).filter(tt.Topic_tag.topic_name == topic_name).first()
+        data=Session.query(tt.Topic_tag).filter(tt.Topic_tag.topic_name==topic_name).first()
         if data is None:
-            raise HTTPException(status_code=404, detail="topic not found")
-        Session.query(qt.Question_Topics).filter(qt.Question_Topics.topic_name == topic_name).delete(synchronize_session=False)
+            raise HTTPException(status_code=404,detail="topic not found")
         Session.delete(data)
         Session.commit()
         return {
-            "message": "topic deleted successfully",
-            "topic_name": topic_name
+            "message":"topic deleted successfully",
+            "topic_name":topic_name
         }
     except HTTPException:
         raise
-    except Exception:
+    except Exception as a:
         Session.rollback()
         raise HTTPException(status_code=500,detail="error deleting topic")
     finally:
