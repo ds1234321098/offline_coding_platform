@@ -9,6 +9,7 @@ from management.question_management import questions
 from management.topic_management import topic_management
 from teacher.session_question_management import s_q_management
 from management.test_case_management import test_case_management
+from student.student_submission import student_submission
 app = FastAPI(
     title="Offline Coding Platform",
     description="Backend API for the university coding platform",
@@ -53,6 +54,11 @@ app.include_router(
     test_case_management,
     prefix="/test_case",
     tags=["Test Case Management"]
+)
+app.include_router(
+    student_submission,
+    prefix="/student_submission",
+    tags=["Student Submission"]
 )
 @app.get("/")
 def home():

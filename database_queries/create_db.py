@@ -10,6 +10,7 @@ from session_questions import Session_Questions
 from question_topics import Question_Topics
 from session_topics import Session_Topics
 from test_cases import Test_Cases
+from submissions import Submissions
 def initialize():
     Base.metadata.create_all(engine)
     with engine.begin() as connection:
