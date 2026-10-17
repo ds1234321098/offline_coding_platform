@@ -8,6 +8,7 @@ from student.student_session import student_session
 from management.question_management import questions
 from management.topic_management import topic_management
 from teacher.session_question_management import s_q_management
+from management.test_case_management import test_case_management
 app = FastAPI(
     title="Offline Coding Platform",
     description="Backend API for the university coding platform",
@@ -47,6 +48,11 @@ app.include_router(
     auth2,
     prefix="/student_auth",
     tags=["Student Authenticator"]
+)
+app.include_router(
+    test_case_management,
+    prefix="/test_case",
+    tags=["Test Case Management"]
 )
 @app.get("/")
 def home():
