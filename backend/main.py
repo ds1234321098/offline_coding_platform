@@ -1,6 +1,5 @@
 import os, sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "database_queries")))
-import create_db
 from fastapi import FastAPI
 from teacher.teacher_session import session
 from auth.teacher_auth import auth as auth1
